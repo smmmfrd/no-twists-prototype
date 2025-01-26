@@ -1,6 +1,8 @@
 class_name State
 extends Node
 
+@export var move_speed : int = 3
+
 @export var animation_name : String
 
 var parent : CharacterBody3D
@@ -24,3 +26,6 @@ func process_frame(delta : float) -> State:
 
 func get_movement_input() -> Vector3:
 	return parent.get_movement_direction()
+
+func rotate_visuals(direction: Vector3) -> void:
+	parent.visuals.look_at(parent.position + direction)

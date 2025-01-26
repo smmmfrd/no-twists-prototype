@@ -3949,5 +3949,7 @@ script = ExtResource("3_ycy1b")
 move_state = NodePath("../Move")
 animation_name = "idle"
 
-[node name="Move" type="Node" parent="State Machine"]
+[node name="Move" type="Node" parent="State Machine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("4_i1k5w")
+idle_state = NodePath("../Idle")
+animation_name = "walking"

@@ -32,15 +32,15 @@ func _input(event: InputEvent) -> void:
 		# Rotating camera joint
 		camera_joint.rotate_x(deg_to_rad(-event.relative.y * MOUSE_VERTICAL_SENS))
 		camera_joint.rotation.x = clampf(camera_joint.rotation.x, -deg_to_rad(MAX_LOOK_ANGLE), deg_to_rad(MAX_LOOK_ANGLE))
-	#
-	#if event.is_action_pressed("ui_cancel"):
-		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	#
-	#if event.is_action_pressed("click"):
-		#if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-			#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-#
-#
+	
+	if event.is_action_pressed("ui_cancel"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	if event.is_action_pressed("click"):
+		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+
 #func _physics_process(delta: float) -> void:
 	#if Input.is_action_just_pressed("attack") and !locked:
 		#if animation_player.current_animation != "kick":
