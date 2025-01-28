@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=4 uid="uid://rfr1n5umqk5"]
+[gd_scene load_steps=19 format=4 uid="uid://rfr1n5umqk5"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_wloo2"]
 [ext_resource type="Script" path="res://state_machine.gd" id="2_51mkk"]
 [ext_resource type="Script" path="res://idle.gd" id="3_ycy1b"]
 [ext_resource type="Script" path="res://move.gd" id="4_i1k5w"]
+[ext_resource type="Script" path="res://falling.gd" id="5_vkqkq"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mudjj"]
 radius = 0.3
@@ -3944,12 +3945,20 @@ transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 
 script = ExtResource("2_51mkk")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="State Machine" node_paths=PackedStringArray("move_state")]
+[node name="Idle" type="Node" parent="State Machine" node_paths=PackedStringArray("move_state", "falling_state")]
 script = ExtResource("3_ycy1b")
 move_state = NodePath("../Move")
+falling_state = NodePath("../Falling")
 animation_name = "idle"
 
-[node name="Move" type="Node" parent="State Machine" node_paths=PackedStringArray("idle_state")]
+[node name="Move" type="Node" parent="State Machine" node_paths=PackedStringArray("idle_state", "falling_state")]
 script = ExtResource("4_i1k5w")
 idle_state = NodePath("../Idle")
+falling_state = NodePath("../Falling")
 animation_name = "walking"
+
+[node name="Falling" type="Node" parent="State Machine" node_paths=PackedStringArray("idle_state", "moving_state")]
+script = ExtResource("5_vkqkq")
+idle_state = NodePath("../Idle")
+moving_state = NodePath("../Move")
+animation_name = "knock_down"

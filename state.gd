@@ -7,7 +7,7 @@ extends Node
 
 var parent : CharacterBody3D
 
-var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity : float =  -ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func enter() -> void:
 	parent.animation_player.play(animation_name)
@@ -15,17 +15,18 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
-func process_input(event: InputEvent) -> State:
+func process_input(_event: InputEvent) -> State:
 	return null
 
-func process_physics(delta : float) -> State:
+func process_physics(_delta : float) -> State:
 	return null
 
-func process_frame(delta : float) -> State:
+func process_frame(_delta : float) -> State:
 	return null
 
 func get_movement_input() -> Vector3:
 	return parent.get_movement_direction()
 
 func rotate_visuals(direction: Vector3) -> void:
-	parent.visuals.look_at(parent.position + direction)
+	if direction != Vector3.ZERO:
+		parent.visuals.look_at(parent.position + direction)
