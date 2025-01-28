@@ -2,8 +2,16 @@ extends State
 
 @export var idle_state : State
 @export var falling_state : State
+@export var jumping_state : State
+
+func process_input(event: InputEvent) -> State:
+	if get_jump():
+		return jumping_state
+	
+	return null
 
 func process_frame(_delta : float) -> State:
+	
 	var direction = get_movement_input()
 	
 	rotate_visuals(direction)

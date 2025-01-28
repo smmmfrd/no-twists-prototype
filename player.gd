@@ -40,7 +40,6 @@ func _input(event: InputEvent) -> void:
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-
 #func _physics_process(delta: float) -> void:
 	#if Input.is_action_just_pressed("attack") and !locked:
 		#if animation_player.current_animation != "kick":
@@ -81,15 +80,18 @@ func _input(event: InputEvent) -> void:
 	#
 	#if !locked:
 		#move_and_slide()
-
-func attack_finished(_anim_name : String):
-	locked = false
+#
+#func attack_finished(_anim_name : String):
+	#locked = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
+
+func wants_jump() -> bool:
+	return Input.is_action_just_pressed("jump")
 
 func get_movement_direction() -> Vector3:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
