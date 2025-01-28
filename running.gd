@@ -1,10 +1,10 @@
 extends State
 
 @export var idle_state : State
+@export var moving_state : State
 @export var falling_state : State
 @export var jumping_state : State
 @export var attacking_state : State
-@export var running_state : State
 
 func process_input(event: InputEvent) -> State:
 	if get_attack():
@@ -13,8 +13,8 @@ func process_input(event: InputEvent) -> State:
 	if get_jump():
 		return jumping_state
 	
-	if get_run():
-		return running_state
+	if not get_run():
+		return moving_state
 	
 	return null
 

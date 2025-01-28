@@ -52,6 +52,9 @@ func wants_jump() -> bool:
 func wants_attack() -> bool:
 	return Input.is_action_just_pressed("attack")
 
+func wants_run() -> bool:
+	return Input.is_action_pressed("sprint")
+
 func get_movement_direction() -> Vector3:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var movement := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()

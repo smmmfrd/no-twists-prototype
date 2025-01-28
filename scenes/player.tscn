@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://rfr1n5umqk5"]
+[gd_scene load_steps=22 format=4 uid="uid://rfr1n5umqk5"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_wloo2"]
 [ext_resource type="Script" path="res://state_machine.gd" id="2_51mkk"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://states/falling.gd" id="5_vkqkq"]
 [ext_resource type="Script" path="res://states/jumping.gd" id="6_d3uvg"]
 [ext_resource type="Script" path="res://states/attacking.gd" id="7_ngpmb"]
+[ext_resource type="Script" path="res://running.gd" id="8_tcvll"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mudjj"]
 radius = 0.3
@@ -3955,12 +3956,13 @@ jumping_state = NodePath("../Jumping")
 attacking_state = NodePath("../Attacking")
 animation_name = "idle"
 
-[node name="Move" type="Node" parent="State Machine" node_paths=PackedStringArray("idle_state", "falling_state", "jumping_state", "attacking_state")]
+[node name="Move" type="Node" parent="State Machine" node_paths=PackedStringArray("idle_state", "falling_state", "jumping_state", "attacking_state", "running_state")]
 script = ExtResource("4_i1k5w")
 idle_state = NodePath("../Idle")
 falling_state = NodePath("../Falling")
 jumping_state = NodePath("../Jumping")
 attacking_state = NodePath("../Attacking")
+running_state = NodePath("../Running")
 animation_name = "walking"
 
 [node name="Falling" type="Node" parent="State Machine" node_paths=PackedStringArray("idle_state", "moving_state")]
@@ -3982,3 +3984,29 @@ script = ExtResource("7_ngpmb")
 idle_state = NodePath("../Idle")
 moving_state = NodePath("../Move")
 animation_name = "kick"
+
+[node name="Running" type="Node" parent="State Machine" node_paths=PackedStringArray("idle_state", "moving_state", "falling_state", "jumping_state", "attacking_state")]
+script = ExtResource("8_tcvll")
+idle_state = NodePath("../Idle")
+moving_state = NodePath("../Move")
+falling_state = NodePath("../Running Fall")
+jumping_state = NodePath("../Running Jump")
+attacking_state = NodePath("../Attacking")
+move_speed = 5
+animation_name = "running"
+
+[node name="Running Jump" type="Node" parent="State Machine" node_paths=PackedStringArray("idle_state", "moving_state", "falling_state")]
+script = ExtResource("6_d3uvg")
+idle_state = NodePath("../Idle")
+moving_state = NodePath("../Move")
+falling_state = NodePath("../Running Fall")
+jump_velocity = 6.0
+move_speed = 5
+animation_name = "get_up"
+
+[node name="Running Fall" type="Node" parent="State Machine" node_paths=PackedStringArray("idle_state", "moving_state")]
+script = ExtResource("5_vkqkq")
+idle_state = NodePath("../Idle")
+moving_state = NodePath("../Move")
+move_speed = 6
+animation_name = "knock_down"

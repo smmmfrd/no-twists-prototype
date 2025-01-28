@@ -33,6 +33,9 @@ func get_jump() -> bool:
 func get_attack() -> bool:
 	return parent.wants_attack()
 
+func get_run() -> bool:
+	return parent.wants_run()
+
 func rotate_visuals(direction: Vector3) -> void:
 	if direction != Vector3.ZERO:
 		parent.visuals.look_at(parent.position + direction)
