@@ -3,8 +3,12 @@ extends State
 @export var idle_state : State
 @export var falling_state : State
 @export var jumping_state : State
+@export var attacking_state : State
 
 func process_input(event: InputEvent) -> State:
+	if get_attack():
+		return attacking_state
+	
 	if get_jump():
 		return jumping_state
 	

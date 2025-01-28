@@ -40,50 +40,6 @@ func _input(event: InputEvent) -> void:
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-#func _physics_process(delta: float) -> void:
-	#if Input.is_action_just_pressed("attack") and !locked:
-		#if animation_player.current_animation != "kick":
-			#animation_player.play("kick")
-			#animation_player.animation_finished.connect(attack_finished)
-			#print("kickin it")
-			#locked = true
-	#
-	## Add the gravity.
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-	#
-	## Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-	#
-	#var current_speed = WALKING_SPEED if not Input.is_action_pressed("sprint") else RUNNING_SPEED
-	#
-	#if direction:
-		#if !locked:
-			#if Input.is_action_pressed("sprint"):
-				#if animation_player.current_animation != "running":
-					#animation_player.play("running")
-			#else:
-				#if animation_player.current_animation != "walking":
-					#animation_player.play("walking")
-			#
-				#visuals.look_at(position + direction)
-		#
-		#velocity.x = direction.x * current_speed
-		#velocity.z = direction.z * current_speed
-	#else:
-		#if !locked:
-			#if animation_player.current_animation != "idle":
-				#animation_player.play("idle")
-			#velocity.x = move_toward(velocity.x, 0, current_speed)
-			#velocity.z = move_toward(velocity.z, 0, current_speed)
-	#
-	#if !locked:
-		#move_and_slide()
-#
-#func attack_finished(_anim_name : String):
-	#locked = false
-
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
@@ -92,6 +48,9 @@ func _process(delta: float) -> void:
 
 func wants_jump() -> bool:
 	return Input.is_action_just_pressed("jump")
+
+func wants_attack() -> bool:
+	return Input.is_action_just_pressed("attack")
 
 func get_movement_direction() -> Vector3:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")

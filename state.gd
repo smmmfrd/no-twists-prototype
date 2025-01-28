@@ -30,6 +30,9 @@ func get_movement_input() -> Vector3:
 func get_jump() -> bool:
 	return parent.wants_jump()
 
+func get_attack() -> bool:
+	return parent.wants_attack()
+
 func rotate_visuals(direction: Vector3) -> void:
 	if direction != Vector3.ZERO:
 		parent.visuals.look_at(parent.position + direction)
