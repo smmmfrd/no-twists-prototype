@@ -3974,6 +3974,7 @@ script = ExtResource("6_d3uvg")
 idle_state = NodePath("../Idle")
 moving_state = NodePath("../Move")
 falling_state = NodePath("../Falling")
+jump_velocity = 6.0
 animation_name = "get_up"
 
 [node name="Attacking" type="Node" parent="State Machine" node_paths=PackedStringArray("idle_state", "moving_state")]
