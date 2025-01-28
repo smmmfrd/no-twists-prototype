@@ -4000,7 +4000,7 @@ script = ExtResource("6_d3uvg")
 idle_state = NodePath("../Idle")
 moving_state = NodePath("../Move")
 falling_state = NodePath("../Running Fall")
-jump_velocity = 6.0
+jump_velocity = 6.5
 move_speed = 5
 animation_name = "get_up"
 

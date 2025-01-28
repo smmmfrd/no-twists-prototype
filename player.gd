@@ -2,6 +2,11 @@ extends CharacterBody3D
 
 @export var MOUSE_HORIZONTAL_SENS = .5
 @export var MOUSE_VERTICAL_SENS = .5
+
+
+@export var CONTROLLER_HORIZONTAL_SENS = 4
+@export var CONTROLLER_VERTICAL_SENS = 4
+
 @export var MAX_LOOK_ANGLE = 60
 
 @onready var camera_joint : Node3D = %"Camera Joint"
@@ -22,16 +27,9 @@ func _ready() -> void:
 	state_machine.init(self)
 
 func _input(event: InputEvent) -> void:
+	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		# Rotating player
-		rotate_y(deg_to_rad(-event.relative.x * MOUSE_HORIZONTAL_SENS))
-		
-		# Rotate player visual to make model stand in place
-		visuals.rotate_y(deg_to_rad(event.relative.x * MOUSE_HORIZONTAL_SENS))
-		
-		# Rotating camera joint
-		camera_joint.rotate_x(deg_to_rad(-event.relative.y * MOUSE_VERTICAL_SENS))
-		camera_joint.rotation.x = clampf(camera_joint.rotation.x, -deg_to_rad(MAX_LOOK_ANGLE), deg_to_rad(MAX_LOOK_ANGLE))
+		move_camera(event.relative, MOUSE_HORIZONTAL_SENS, MOUSE_VERTICAL_SENS)
 	
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -44,7 +42,23 @@ func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
 
 func _process(delta: float) -> void:
+	var look_direction = Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	
+	if look_direction != Vector2.ZERO:
+		move_camera(look_direction, CONTROLLER_HORIZONTAL_SENS, CONTROLLER_VERTICAL_SENS)
+	
 	state_machine.process_frame(delta)
+
+func move_camera(direction : Vector2, HORIZONTAL_SENS : float, VERTICAL_SENS : float) -> void:
+	# Rotating player
+		rotate_y(deg_to_rad(-direction.x * HORIZONTAL_SENS))
+		
+		# Rotate player visual to make model stand in place
+		visuals.rotate_y(deg_to_rad(direction.x * HORIZONTAL_SENS))
+		
+		# Rotating camera joint
+		camera_joint.rotate_x(deg_to_rad(-direction.y * VERTICAL_SENS))
+		camera_joint.rotation.x = clampf(camera_joint.rotation.x, -deg_to_rad(MAX_LOOK_ANGLE), deg_to_rad(MAX_LOOK_ANGLE))
 
 func wants_jump() -> bool:
 	return Input.is_action_just_pressed("jump")
