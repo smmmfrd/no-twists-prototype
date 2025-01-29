@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuerhihvhirub"]
+
+[ext_resource type="PackedScene" uid="uid://bc7kohrh228mh" path="res://Assets/models/proto-mouse/proto-mouse-rigged.glb" id="1_h10wg"]
+[ext_resource type="Texture2D" uid="uid://l30exa6kc37o" path="res://Assets/models/proto-mouse/proto-mouse-rigged_mouse-prototype-palette.png" id="2_ah0fd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wqvak"]
+albedo_texture = ExtResource("2_ah0fd")
+
+[node name="proto-mouse-rigged" instance=ExtResource("1_h10wg")]
+
+[node name="Mouse" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wqvak")

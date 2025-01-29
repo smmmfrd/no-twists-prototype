@@ -18,7 +18,6 @@ func process_input(_event : InputEvent) -> State:
 	return null
 
 func process_frame(_delta : float) -> State:
-		
 	if not parent.is_on_floor():
 		return falling_state
 	

@@ -24,3 +24,5 @@ func process_frame(_delta : float) -> State:
 
 func attack_finished(_anim_name : String) -> void:
 	attacking = false
+	
+	parent.animation_player.animation_finished.disconnect(attack_finished)

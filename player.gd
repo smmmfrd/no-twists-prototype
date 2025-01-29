@@ -10,7 +10,7 @@ extends CharacterBody3D
 @export var MAX_LOOK_ANGLE = 60
 
 @onready var camera_joint : Node3D = %"Camera Joint"
-@onready var animation_player: AnimationPlayer = $Visuals/mixamo_base/AnimationPlayer
+@onready var animation_player: AnimationPlayer = $"Visuals/proto-mouse-rigged/AnimationPlayer"
 @onready var visuals: Node3D = $Visuals
 @onready var state_machine: Node = $"State Machine"
 
