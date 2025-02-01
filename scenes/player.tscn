@@ -1,14 +1,15 @@
-[gd_scene load_steps=23 format=4 uid="uid://rfr1n5umqk5"]
+[gd_scene load_steps=24 format=4 uid="uid://rfr1n5umqk5"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_wloo2"]
-[ext_resource type="Script" path="res://state_machine.gd" id="2_51mkk"]
-[ext_resource type="PackedScene" uid="uid://bc7kohrh228mh" path="res://Assets/models/proto-mouse/proto-mouse-rigged.glb" id="2_evjoa"]
+[ext_resource type="Script" path="res://states/state_machine.gd" id="2_51mkk"]
 [ext_resource type="Script" path="res://states/idle.gd" id="3_ycy1b"]
 [ext_resource type="Script" path="res://states/move.gd" id="4_i1k5w"]
 [ext_resource type="Script" path="res://states/falling.gd" id="5_vkqkq"]
 [ext_resource type="Script" path="res://states/jumping.gd" id="6_d3uvg"]
 [ext_resource type="Script" path="res://states/attacking.gd" id="7_ngpmb"]
 [ext_resource type="Script" path="res://running.gd" id="8_tcvll"]
+[ext_resource type="Script" path="res://states/camera/cam_state_machine.gd" id="9_7frg3"]
+[ext_resource type="Script" path="res://states/camera/free_cam.gd" id="10_b7vqv"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mudjj"]
 radius = 0.3
@@ -3938,12 +3939,6 @@ libraries = {
 "": SubResource("AnimationLibrary_teda3")
 }
 
-[node name="proto-mouse-rigged" parent="Visuals" instance=ExtResource("2_evjoa")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-visible = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals/proto-mouse-rigged"]
-
 [node name="Camera Joint" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
@@ -4022,3 +4017,10 @@ idle_state = NodePath("../Idle")
 moving_state = NodePath("../Move")
 move_speed = 6
 animation_name = "knock_down"
+
+[node name="Camera State" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("9_7frg3")
+starting_state = NodePath("Free Cam")
+
+[node name="Free Cam" type="Node" parent="Camera State"]
+script = ExtResource("10_b7vqv")
