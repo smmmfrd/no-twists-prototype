@@ -29,9 +29,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
-	if event.is_action_pressed("target"):
-		print("start targeting!")
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
@@ -50,6 +47,9 @@ func wants_attack() -> bool:
 
 func wants_run() -> bool:
 	return Input.is_action_pressed("sprint")
+
+func wants_lock() -> bool:
+	return Input.is_action_pressed("target")
 
 func get_movement_direction() -> Vector3:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")

@@ -23,3 +23,6 @@ func process_frame(_delta : float) -> CameraState:
 
 func get_camera_input() -> Vector2:
 	return parent.get_camera_direction()
+
+func wants_lock() -> bool:
+	return parent.wants_lock()

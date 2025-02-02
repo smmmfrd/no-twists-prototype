@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://rfr1n5umqk5"]
+[gd_scene load_steps=25 format=4 uid="uid://rfr1n5umqk5"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_wloo2"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="2_51mkk"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://running.gd" id="8_tcvll"]
 [ext_resource type="Script" path="res://states/camera/cam_state_machine.gd" id="9_7frg3"]
 [ext_resource type="Script" path="res://states/camera/free_cam.gd" id="10_b7vqv"]
+[ext_resource type="Script" path="res://states/camera/lock_cam.gd" id="11_f1e85"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mudjj"]
 radius = 0.3
@@ -4022,5 +4023,10 @@ animation_name = "knock_down"
 script = ExtResource("9_7frg3")
 starting_state = NodePath("Free Cam")
 
-[node name="Free Cam" type="Node" parent="Camera State"]
+[node name="Free Cam" type="Node" parent="Camera State" node_paths=PackedStringArray("lock_state")]
 script = ExtResource("10_b7vqv")
+lock_state = NodePath("../Lock Cam")
+
+[node name="Lock Cam" type="Node" parent="Camera State" node_paths=PackedStringArray("free_state")]
+script = ExtResource("11_f1e85")
+free_state = NodePath("../Free Cam")

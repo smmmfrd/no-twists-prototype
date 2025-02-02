@@ -1,9 +1,14 @@
 extends CameraState
 
+@export var lock_state : CameraState
+
 func process_input(event: InputEvent) -> CameraState:
+	if wants_lock():
+		return lock_state
+	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		free_move_camera(event.relative, controller.MOUSE_HORIZONTAL_SENS, controller.MOUSE_VERTICAL_SENS)
-		
+	
 	return null
 
 func process_frame(_delta : float) -> CameraState:
