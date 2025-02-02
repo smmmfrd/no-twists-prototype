@@ -1,8 +1,19 @@
 extends CameraState
 
+@export var cam_join_offset : Vector3
+
 @export var free_state : CameraState
 
-func process_input(event: InputEvent) -> CameraState:
+var joint_start_pos : Vector3
+
+func enter() -> void:
+	joint_start_pos = parent.camera_joint.position
+	parent.camera_joint.position = parent.camera_joint.position + cam_join_offset
+
+func exit() -> void:
+	parent.camera_joint.position = joint_start_pos
+
+func process_input(_event: InputEvent) -> CameraState:
 	if wants_lock():
 		return free_state
 	

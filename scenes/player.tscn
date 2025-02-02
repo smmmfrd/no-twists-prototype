@@ -4029,4 +4029,5 @@ lock_state = NodePath("../Lock Cam")
 
 [node name="Lock Cam" type="Node" parent="Camera State" node_paths=PackedStringArray("free_state")]
 script = ExtResource("11_f1e85")
+cam_join_offset = Vector3(1, 1, 0)
 free_state = NodePath("../Free Cam")

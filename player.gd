@@ -35,7 +35,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	camera_state.process_input(event)
 
 func _process(delta: float) -> void:
-	
 	state_machine.process_frame(delta)
 	camera_state.process_frame(delta)
 
@@ -49,7 +48,7 @@ func wants_run() -> bool:
 	return Input.is_action_pressed("sprint")
 
 func wants_lock() -> bool:
-	return Input.is_action_pressed("target")
+	return Input.is_action_just_pressed("target")
 
 func get_movement_direction() -> Vector3:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
